@@ -1,16 +1,28 @@
-"use client"
-import { useRef, useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Sparkles, Flame, TrendingUp, Zap, Film, Tv } from 'lucide-react'
-import Link from "next/link"
-import { MainNav } from "../components/main-nav"
-import { Button } from "../components/ui/button"
-import { Badge } from "../components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
-import { ClipPreview } from "../components/clip-player"
-import { SeriesCard } from "../components/series-card"
-import { MoviePoster } from "../components/movie-poster"
-
-
+"use client";
+import { useRef, useState, useEffect } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  Flame,
+  TrendingUp,
+  Zap,
+  Film,
+  Tv,
+} from "lucide-react";
+import Link from "next/link";
+import { MainNav } from "../components/main-nav";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
+import { ClipPreview } from "../components/clip-player";
+import { SeriesCard } from "../components/series-card";
+import { MoviePoster } from "../components/movie-poster";
 
 // Featured clips (regular landscape videos)
 const featuredClips = [
@@ -21,8 +33,10 @@ const featuredClips = [
     views: 1876500,
     likes: 92340,
     thumbnail: "https://images.unsplash.com/photo-1536440136628-849c177e76a1",
-    creatorAvatar: "https://images.unsplash.com/photo-1511367461989-f85a21fda167",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1511367461989-f85a21fda167",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     category: "Thriller",
   },
   {
@@ -32,8 +46,10 @@ const featuredClips = [
     views: 2145000,
     likes: 103250,
     thumbnail: "https://images.unsplash.com/photo-1493804714600-6edb1cd93080",
-    creatorAvatar: "https://images.unsplash.com/photo-1519638399535-1b036603ac77",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1519638399535-1b036603ac77",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     category: "Sci-Fi",
   },
   {
@@ -43,8 +59,10 @@ const featuredClips = [
     views: 935000,
     likes: 78500,
     thumbnail: "https://images.unsplash.com/photo-1518331647614-7a1f04cd34cf",
-    creatorAvatar: "https://images.unsplash.com/photo-1518709594023-6ebd2b2b69c4",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1518709594023-6ebd2b2b69c4",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     category: "Adventure",
   },
   {
@@ -54,8 +72,10 @@ const featuredClips = [
     views: 1568000,
     likes: 127500,
     thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728",
-    creatorAvatar: "https://images.unsplash.com/photo-1487174244970-cd18784bb4a4",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1487174244970-cd18784bb4a4",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     category: "Drama",
   },
   {
@@ -66,7 +86,8 @@ const featuredClips = [
     likes: 158900,
     thumbnail: "https://images.unsplash.com/photo-1478720568477-152d9b164e26",
     creatorAvatar: "https://images.unsplash.com/photo-1542204165-65bf26472b9b",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
     category: "Mystery",
   },
   {
@@ -76,8 +97,10 @@ const featuredClips = [
     views: 1920000,
     likes: 132000,
     thumbnail: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9",
-    creatorAvatar: "https://images.unsplash.com/photo-1581822261290-991b38693d1b",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1581822261290-991b38693d1b",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
     category: "Sci-Fi",
   },
   {
@@ -88,7 +111,8 @@ const featuredClips = [
     likes: 76300,
     thumbnail: "https://images.unsplash.com/photo-1535016120720-40c646be5580",
     creatorAvatar: "https://images.unsplash.com/photo-1542185546-1866f643f368",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
     category: "Horror",
   },
   {
@@ -99,7 +123,8 @@ const featuredClips = [
     likes: 94200,
     thumbnail: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800",
     creatorAvatar: "https://images.unsplash.com/photo-1553481187-be93c21490a9",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     category: "Adventure",
   },
   {
@@ -109,8 +134,10 @@ const featuredClips = [
     views: 2580000,
     likes: 187000,
     thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
-    creatorAvatar: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     category: "Sci-Fi",
   },
   {
@@ -120,8 +147,10 @@ const featuredClips = [
     views: 1230000,
     likes: 108500,
     thumbnail: "https://images.unsplash.com/photo-1507924538820-ede94a04019d",
-    creatorAvatar: "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
     category: "Action",
   },
   {
@@ -131,8 +160,10 @@ const featuredClips = [
     views: 675000,
     likes: 59800,
     thumbnail: "https://images.unsplash.com/photo-1498036882173-b41c28a8ba34",
-    creatorAvatar: "https://images.unsplash.com/photo-1570610155223-66279ba81b41",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1570610155223-66279ba81b41",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
     category: "Mystery",
   },
   {
@@ -143,7 +174,8 @@ const featuredClips = [
     likes: 145200,
     thumbnail: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564",
     creatorAvatar: "https://images.unsplash.com/photo-1543286386-713bdd548da4",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
     category: "Sci-Fi",
   },
   {
@@ -153,8 +185,10 @@ const featuredClips = [
     views: 945000,
     likes: 82700,
     thumbnail: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d",
-    creatorAvatar: "https://images.unsplash.com/photo-1506102383123-c8ef1e872756",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1506102383123-c8ef1e872756",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     category: "Drama",
   },
   {
@@ -165,7 +199,8 @@ const featuredClips = [
     likes: 168500,
     thumbnail: "https://images.unsplash.com/photo-1520034475321-cbe63696469a",
     creatorAvatar: "https://images.unsplash.com/photo-1542791851-97dcc10e5b56",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     category: "Action",
   },
   {
@@ -175,11 +210,13 @@ const featuredClips = [
     views: 1370000,
     likes: 112300,
     thumbnail: "https://images.unsplash.com/photo-1496275068113-fff8c90750d1",
-    creatorAvatar: "https://images.unsplash.com/photo-1499334650700-42e4f7ffc63d",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1499334650700-42e4f7ffc63d",
+    videoUrl:
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     category: "Documentary",
   },
-]
+];
 
 // New portrait mode series
 const portraitSeries = [
@@ -191,9 +228,12 @@ const portraitSeries = [
     seasons: 4,
     views: 15250000,
     likes: 985000,
-    thumbnail: "https://images.unsplash.com/photo-1626379953822-baec19c3accd?w=500&h=800&fit=crop",
-    coverPhoto: "https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?w=800&h=500&fit=crop",
-    creatorAvatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1626379953822-baec19c3accd?w=500&h=800&fit=crop",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?w=800&h=500&fit=crop",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
     description:
       "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
     category: "Sci-Fi",
@@ -201,7 +241,7 @@ const portraitSeries = [
     year: 2016,
     rating: "TV-14",
   },
-  
+
   {
     id: "breaking-bad",
     title: "Breaking Bad",
@@ -210,9 +250,12 @@ const portraitSeries = [
     seasons: 5,
     views: 18500000,
     likes: 1285000,
-    thumbnail: "https://images.unsplash.com/photo-1504593811423-6dd665756598?w=500&h=800&fit=crop",
-    coverPhoto: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?w=800&h=500&fit=crop",
-    creatorAvatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&h=150&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?w=500&h=800&fit=crop",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?w=800&h=500&fit=crop",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&h=150&fit=crop",
     description:
       "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine to secure his family's future.",
     category: "Drama",
@@ -228,9 +271,12 @@ const portraitSeries = [
     seasons: 2,
     views: 14200000,
     likes: 925000,
-    thumbnail: "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=500&h=800&fit=crop",
-    coverPhoto: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=500&fit=crop",
-    creatorAvatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=500&h=800&fit=crop",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=500&fit=crop",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
     description:
       "Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.",
     category: "Fantasy",
@@ -246,9 +292,12 @@ const portraitSeries = [
     seasons: 1,
     views: 22500000,
     likes: 1485000,
-    thumbnail: "https://images.unsplash.com/photo-1634157703702-3c124b455499?w=500&h=800&fit=crop",
-    coverPhoto: "https://images.unsplash.com/photo-1635002964051-aacc233a8290?w=800&h=500&fit=crop",
-    creatorAvatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1634157703702-3c124b455499?w=500&h=800&fit=crop",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1635002964051-aacc233a8290?w=800&h=500&fit=crop",
+    creatorAvatar:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
     description:
       "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits with deadly high stakes.",
     category: "Thriller",
@@ -256,7 +305,7 @@ const portraitSeries = [
     year: 2021,
     rating: "TV-MA",
   },
-]
+];
 
 // Movie posters in landscape mode
 const moviePosters = [
@@ -267,8 +316,10 @@ const moviePosters = [
     year: 2010,
     rating: "PG-13",
     duration: "2h 28m",
-    poster: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=800&h=450&fit=crop",
-    backdrop: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1200&h=600&fit=crop",
+    poster:
+      "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=800&h=450&fit=crop",
+    backdrop:
+      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1200&h=600&fit=crop",
     description:
       "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
     genre: "Sci-Fi",
@@ -281,9 +332,12 @@ const moviePosters = [
     year: 2014,
     rating: "PG-13",
     duration: "2h 49m",
-    poster: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&h=450&fit=crop",
-    backdrop: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop",
-    description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    poster:
+      "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&h=450&fit=crop",
+    backdrop:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop",
+    description:
+      "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
     genre: "Sci-Fi",
     stars: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
   },
@@ -294,8 +348,10 @@ const moviePosters = [
     year: 2017,
     rating: "R",
     duration: "2h 44m",
-    poster: "https://images.unsplash.com/photo-1520034475321-cbe63696469a?w=800&h=450&fit=crop",
-    backdrop: "https://images.unsplash.com/photo-1493804714600-6edb1cd93080?w=1200&h=600&fit=crop",
+    poster:
+      "https://images.unsplash.com/photo-1520034475321-cbe63696469a?w=800&h=450&fit=crop",
+    backdrop:
+      "https://images.unsplash.com/photo-1493804714600-6edb1cd93080?w=1200&h=600&fit=crop",
     description:
       "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who's been missing for thirty years.",
     genre: "Sci-Fi",
@@ -308,8 +364,10 @@ const moviePosters = [
     year: 2021,
     rating: "PG-13",
     duration: "2h 35m",
-    poster: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=450&fit=crop",
-    backdrop: "https://images.unsplash.com/photo-1518331647614-7a1f04cd34cf?w=1200&h=600&fit=crop",
+    poster:
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=450&fit=crop",
+    backdrop:
+      "https://images.unsplash.com/photo-1518331647614-7a1f04cd34cf?w=1200&h=600&fit=crop",
     description:
       "Feature adaptation of Frank Herbert's science fiction novel about the son of a noble family entrusted with the protection of the most valuable asset and most vital element in the galaxy.",
     genre: "Sci-Fi",
@@ -322,8 +380,10 @@ const moviePosters = [
     year: 2019,
     rating: "R",
     duration: "2h 2m",
-    poster: "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=800&h=450&fit=crop",
-    backdrop: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1200&h=600&fit=crop",
+    poster:
+      "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=800&h=450&fit=crop",
+    backdrop:
+      "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1200&h=600&fit=crop",
     description:
       "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.",
     genre: "Drama",
@@ -336,14 +396,16 @@ const moviePosters = [
     year: 2019,
     rating: "R",
     duration: "2h 12m",
-    poster: "https://images.unsplash.com/photo-1498036882173-b41c28a8ba34?w=800&h=450&fit=crop",
-    backdrop: "https://images.unsplash.com/photo-1535016120720-40c646be5580?w=1200&h=600&fit=crop",
+    poster:
+      "https://images.unsplash.com/photo-1498036882173-b41c28a8ba34?w=800&h=450&fit=crop",
+    backdrop:
+      "https://images.unsplash.com/photo-1535016120720-40c646be5580?w=1200&h=600&fit=crop",
     description:
       "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
     genre: "Thriller",
     stars: ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong"],
   },
-]
+];
 
 // Updated trending hashtags
 const trendingHashtags = [
@@ -353,7 +415,7 @@ const trendingHashtags = [
   { name: "#ActionShorts", count: "1.9M" },
   { name: "#MysteryClips", count: "1.7M" },
   { name: "#DramaScenes", count: "1.4M" },
-]
+];
 
 // Updated categories
 const categories = [
@@ -361,73 +423,73 @@ const categories = [
   { name: "Trending", icon: TrendingUp },
   { name: "Action", icon: Flame },
   { name: "Sci-Fi", icon: Zap },
-]
+];
 
 export default function Home() {
-  const featuredScrollRef = useRef<HTMLDivElement>(null)
-  const seriesScrollRef = useRef<HTMLDivElement>(null)
-  const movieScrollRef = useRef<HTMLDivElement>(null)
-  const [autoScrollPaused, setAutoScrollPaused] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("For You")
-  const [showConfetti, setShowConfetti] = useState(false)
+  const featuredScrollRef = useRef<HTMLDivElement>(null);
+  const seriesScrollRef = useRef<HTMLDivElement>(null);
+  const movieScrollRef = useRef<HTMLDivElement>(null);
+  const [autoScrollPaused, setAutoScrollPaused] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("For You");
+  const [showConfetti, setShowConfetti] = useState(false);
 
   // Auto-scroll functionality - client-side only
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null
+    let interval: NodeJS.Timeout | null = null;
 
     if (typeof window !== "undefined" && featuredScrollRef.current) {
       const start = () => {
-        if (autoScrollPaused || !featuredScrollRef.current) return
+        if (autoScrollPaused || !featuredScrollRef.current) return;
 
-        let scrollAmount = 0
-        const distance = 1
-        const scrollWidth = featuredScrollRef.current.scrollWidth
-        const clientWidth = featuredScrollRef.current.clientWidth
+        let scrollAmount = 0;
+        const distance = 1;
+        const scrollWidth = featuredScrollRef.current.scrollWidth;
+        const clientWidth = featuredScrollRef.current.clientWidth;
 
         const autoScroll = () => {
-          if (!featuredScrollRef.current || autoScrollPaused) return
+          if (!featuredScrollRef.current || autoScrollPaused) return;
 
-          scrollAmount += distance
-          featuredScrollRef.current.scrollLeft = scrollAmount
+          scrollAmount += distance;
+          featuredScrollRef.current.scrollLeft = scrollAmount;
 
           if (scrollAmount >= scrollWidth - clientWidth) {
-            scrollAmount = 0
+            scrollAmount = 0;
           }
-        }
+        };
 
-        interval = setInterval(autoScroll, 50)
-      }
+        interval = setInterval(autoScroll, 50);
+      };
 
-      start()
+      start();
     }
 
     return () => {
       if (interval) {
-        clearInterval(interval)
+        clearInterval(interval);
       }
-    }
-  }, [autoScrollPaused])
+    };
+  }, [autoScrollPaused]);
 
   // Pause auto-scroll on hover or touch
-  const pauseAutoScroll = () => setAutoScrollPaused(true)
-  const resumeAutoScroll = () => setAutoScrollPaused(false)
+  const pauseAutoScroll = () => setAutoScrollPaused(true);
+  const resumeAutoScroll = () => setAutoScrollPaused(false);
 
   const scrollLeft = (ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
-      ref.current.scrollBy({ left: -300, behavior: "smooth" })
+      ref.current.scrollBy({ left: -300, behavior: "smooth" });
     }
-  }
+  };
 
   const scrollRight = (ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
-      ref.current.scrollBy({ left: 300, behavior: "smooth" })
+      ref.current.scrollBy({ left: 300, behavior: "smooth" });
     }
-  }
+  };
 
   const triggerConfetti = () => {
-    setShowConfetti(true)
-    setTimeout(() => setShowConfetti(false), 3000)
-  }
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 3000);
+  };
 
   return (
     <div className="min-h-screen bg-[#0c0a09] text-white">
@@ -465,7 +527,11 @@ export default function Home() {
               Portrait Series
             </h2>
             <Link href="/browse-series">
-              <Button variant="outline" size="sm" className="bg-purple-900 hover:bg-purple-700 border-0 text-white">
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-purple-900 hover:bg-purple-700 border-0 text-white"
+              >
                 Browse All
               </Button>
             </Link>
@@ -487,7 +553,10 @@ export default function Home() {
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {portraitSeries.map((series) => (
-                <div key={series.id} className="snap-start w-[180px] sm:w-[220px]">
+                <div
+                  key={series.id}
+                  className="snap-start w-[180px] sm:w-[220px]"
+                >
                   <SeriesCard series={series} />
                 </div>
               ))}
@@ -511,7 +580,11 @@ export default function Home() {
               Featured Movies
             </h2>
             <Link href="/browse-movies">
-              <Button variant="outline" size="sm" className="bg-red-900 hover:bg-red-700 border-0 text-white">
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-red-900 hover:bg-red-700 border-0 text-white"
+              >
                 Browse All
               </Button>
             </Link>
@@ -533,7 +606,10 @@ export default function Home() {
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {moviePosters.map((movie) => (
-                <div key={movie.id} className="snap-start w-[320px] sm:w-[380px]">
+                <div
+                  key={movie.id}
+                  className="snap-start w-[320px] sm:w-[380px]"
+                >
                   <MoviePoster movie={movie} />
                 </div>
               ))}
@@ -586,8 +662,16 @@ export default function Home() {
               onTouchEnd={resumeAutoScroll}
             >
               {featuredClips.map((clip, index) => (
-                <div key={`${clip.id}-${index}`} className="snap-start w-[240px]">
-                  <ClipPreview clip={clip} onClick={() => (window.location.href = `/shorts?id=${clip.id}`)} />
+                <div
+                  key={`${clip.id}-${index}`}
+                  className="snap-start w-[240px]"
+                >
+                  <ClipPreview
+                    clip={clip}
+                    onClick={() =>
+                      (window.location.href = `/shorts?id=${clip.id}`)
+                    }
+                  />
                 </div>
               ))}
             </div>
@@ -602,8 +686,6 @@ export default function Home() {
             </Button>
           </div>
         </div>
-
-   
 
         {/* Category Tabs */}
         <div className="mb-8">
@@ -623,7 +705,11 @@ export default function Home() {
             </TabsList>
 
             {categories.map((category) => (
-              <TabsContent key={category.name} value={category.name} className="mt-0">
+              <TabsContent
+                key={category.name}
+                value={category.name}
+                className="mt-0"
+              >
                 <div>
                   <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                     {category.name} Videos
@@ -634,12 +720,20 @@ export default function Home() {
                         (clip) =>
                           category.name === "For You" ||
                           category.name === "Trending" ||
-                          clip.category === category.name,
+                          clip.category === category.name
                       )
                       .slice(0, 12)
                       .map((clip, index) => (
-                        <div key={`${category.name}-${clip.id}-${index}`} className="w-full">
-                          <ClipPreview clip={clip} onClick={() => (window.location.href = `/shorts?id=${clip.id}`)} />
+                        <div
+                          key={`${category.name}-${clip.id}-${index}`}
+                          className="w-full"
+                        >
+                          <ClipPreview
+                            clip={clip}
+                            onClick={() =>
+                              (window.location.href = `/shorts?id=${clip.id}`)
+                            }
+                          />
                         </div>
                       ))}
                   </div>
@@ -650,7 +744,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-
