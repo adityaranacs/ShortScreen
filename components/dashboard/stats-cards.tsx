@@ -106,16 +106,18 @@ function StatsCard({ title, value, change, isPositive, icon }: StatsCardProps) {
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground flex items-center mt-1">
-          {isPositive ? (
-            <ArrowUpRight className="mr-1 h-4 w-4 text-green-500" />
-          ) : (
-            <ArrowDownRight className="mr-1 h-4 w-4 text-red-500" />
-          )}
-          <span className={isPositive ? "text-green-500" : "text-red-500"}>{change}%</span> from previous period
-        </p>
+        <div className="flex flex-col mt-1">
+          <div className="flex items-center text-xs">
+            {isPositive ? (
+              <ArrowUpRight className="mr-1 h-4 w-4 text-green-500" />
+            ) : (
+              <ArrowDownRight className="mr-1 h-4 w-4 text-red-500" />
+            )}
+            <span className={isPositive ? "text-green-500" : "text-red-500"}>{change}%</span>
+          </div>
+          <p className="text-xs text-muted-foreground">from previous period</p>
+        </div>
       </CardContent>
     </Card>
   )
 }
-
