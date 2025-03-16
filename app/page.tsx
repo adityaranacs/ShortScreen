@@ -305,6 +305,76 @@ const portraitSeries = [
     year: 2021,
     rating: "TV-MA",
   },
+  {
+    id: "game-of-thrones",
+    title: "Game of Thrones",
+    creator: "HBOOriginals",
+    episodes: 73,
+    seasons: 8,
+    views: 25600000,
+    likes: 1680000,
+    thumbnail: "https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?w=500&h=800&fit=crop",
+    coverPhoto: "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=800&h=500&fit=crop",
+    creatorAvatar: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=150&h=150&fit=crop",
+    description: "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.",
+    category: "Fantasy",
+    isPortrait: true,
+    year: 2011,
+    rating: "TV-MA",
+  },
+  {
+    id: "money-heist",
+    title: "Money Heist",
+    creator: "NetflixOriginals",
+    episodes: 41,
+    seasons: 5,
+    views: 19800000,
+    likes: 1320000,
+    thumbnail: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=500&h=800&fit=crop",
+    coverPhoto: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?w=800&h=500&fit=crop",
+    creatorAvatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
+    description: "A criminal mastermind who goes by 'The Professor' has a plan to pull off the biggest heist in recorded history -- to print billions of euros in the Royal Mint of Spain.",
+    category: "Crime",
+    isPortrait: true,
+    year: 2017,
+    rating: "TV-MA",
+  },
+  
+  {
+    id: "wednesday",
+    title: "Wednesday",
+    creator: "NetflixOriginals",
+    episodes: 8,
+    seasons: 1,
+    views: 17250000,
+    likes: 1125000,
+    thumbnail: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=500&h=800&fit=crop",
+    coverPhoto: "https://images.unsplash.com/photo-1506202687253-52e1b29d3527?w=800&h=500&fit=crop",
+    creatorAvatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
+    description: "Wednesday Addams is sent to Nevermore Academy, a bizarre boarding school where she attempts to master her psychic powers and solve a murder mystery connected to her family's past.",
+    category: "Comedy-Horror",
+    isPortrait: true,
+    year: 2022,
+    rating: "TV-14",
+  },
+ 
+  {
+    id: "bridgerton",
+    title: "Bridgerton",
+    creator: "NetflixOriginals",
+    episodes: 16,
+    seasons: 2,
+    views: 20100000,
+    likes: 1350000,
+    thumbnail: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=500&h=800&fit=crop",
+    coverPhoto: "https://images.unsplash.com/photo-1533387520709-752d83de3630?w=800&h=500&fit=crop",
+    creatorAvatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&fit=crop",
+    description: "Wealth, lust, and betrayal set against the backdrop of Regency-era England, seen through the eyes of the powerful Bridgerton family.",
+    category: "Romance",
+    isPortrait: true,
+    year: 2020,
+    rating: "TV-MA",
+  }
 ];
 
 // Movie posters in landscape mode
@@ -426,9 +496,9 @@ const categories = [
 ];
 
 export default function Home() {
-  const featuredScrollRef = useRef<HTMLDivElement>(null);
-  const seriesScrollRef = useRef<HTMLDivElement>(null);
-  const movieScrollRef = useRef<HTMLDivElement>(null);
+  const featuredScrollRef = useRef<HTMLDivElement | null>(null);
+  const seriesScrollRef = useRef<HTMLDivElement | null>(null);
+  const movieScrollRef = useRef<HTMLDivElement | null>(null);
   const [autoScrollPaused, setAutoScrollPaused] = useState(false);
   const [activeCategory, setActiveCategory] = useState("For You");
   const [showConfetti, setShowConfetti] = useState(false);
@@ -743,6 +813,6 @@ export default function Home() {
           </Tabs>
         </div>
       </div>
-    </div>
-  );
+    </div>
+  );
 }

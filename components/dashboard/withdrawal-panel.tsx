@@ -88,10 +88,9 @@ export function WithdrawalPanel() {
               <span>${withdrawalThreshold.toFixed(2)}</span>
             </div>
             <Progress
-              value={(currentBalance / withdrawalThreshold) * 100}
-              className="h-2"
-              indicatorClassName={canWithdraw ? "bg-green-500" : ""}
-            />
+  value={(currentBalance / withdrawalThreshold) * 100}
+  className={`h-2 ${canWithdraw ? "bg-green-500" : ""}`}
+/>
           </div>
           {canWithdraw ? (
             <Alert className="bg-green-500/10 border-green-500/50 text-green-500">
@@ -227,7 +226,6 @@ export function WithdrawalPanel() {
           </DialogContent>
         </Dialog>
       </CardFooter>
-    </Card>
-  )
+    </Card>
+  )
 }
-

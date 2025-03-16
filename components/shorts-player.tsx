@@ -346,6 +346,11 @@ const uiVisibilityTimeout = useRef<NodeJS.Timeout | null>(null);
     return num.toString()
   }
 
+  const getTitleAfterDash = (title: string) => {
+    return title?.includes("-") ? title.split("-").pop()?.trim() ?? "" : title ?? "";
+  };
+  
+  
   const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60)
     const seconds = Math.floor(timeInSeconds % 60)
@@ -353,6 +358,7 @@ const uiVisibilityTimeout = useRef<NodeJS.Timeout | null>(null);
   }
 
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0
+  
 
   return (
 <div 
@@ -393,13 +399,7 @@ const uiVisibilityTimeout = useRef<NodeJS.Timeout | null>(null);
               {/* Video info overlay */}
               <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 ${uiVisible ? 'opacity-100' : 'opacity-0'}`}>
               {/* Episode info for series */}
-                {short.seriesName && short.episode && (
-                  <div className="mb-2">
-                    <Badge className="bg-primary/30 text-white border-0">
-                      Season {short.season} • Episode {short.episode}
-                    </Badge>
-                  </div>
-                )}
+               
 
                 <div className="flex items-start gap-3 mb-2">
                   <Avatar className="h-10 w-10 border-2 border-white">
@@ -410,8 +410,10 @@ const uiVisibilityTimeout = useRef<NodeJS.Timeout | null>(null);
                   </Avatar>
 
                   <div className="flex-1">
-                  <h2 className="text-white font-medium mb-1">{short.title}</h2>
-                  </div>
+                  <h2 className="text-white font-medium mb-1">
+    {getTitleAfterDash(short.title)}
+  </h2>
+                    </div>
                   <Button
                       variant="outline"
                       size="sm"

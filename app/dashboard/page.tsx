@@ -22,6 +22,10 @@ import {
   TabsList,
   TabsTrigger,
 } from "../../components/ui/tabs";
+import { CreatorClipsTable } from "../../components/creator-clips-table";
+import { CreatorEarningsChart } from "../../components/creator-earnings-chart";
+import { CreatorEngagementChart } from "../../components/creator-engagement-chart";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../components/ui/card";
 
 export default function DashboardPage() {
   const [dateRange, setDateRange] = useState("30days");
@@ -42,54 +46,52 @@ export default function DashboardPage() {
             className="space-y-4"
             onValueChange={setActiveTab}
           >
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-              <TabsList className="h-auto p-1">
-                <TabsTrigger value="overview" className="text-xs sm:text-sm">
-                  Overview
-                </TabsTrigger>
-                <TabsTrigger value="earnings" className="text-xs sm:text-sm">
-                  Earnings
-                </TabsTrigger>
-                <TabsTrigger value="content" className="text-xs sm:text-sm">
-                  Content
-                </TabsTrigger>
-                <TabsTrigger value="audience" className="text-xs sm:text-sm">
-                  Audience
-                </TabsTrigger>
-              </TabsList>
+            
+            <Tabs defaultValue="earnings" className="space-y-4">
+          <TabsList>
+            <TabsTrigger value="earnings">Earnings</TabsTrigger>
+            <TabsTrigger value="engagement">Engagement</TabsTrigger>
+            <TabsTrigger value="clips">Top Clips</TabsTrigger>
+          </TabsList>
 
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <DateRangePicker />
-                <Button variant="outline" size="icon" className="h-9 w-9">
-                  <Filter className="h-4 w-4" />
-                  <span className="sr-only">Filter</span>
-                </Button>
-                <Button className="ml-auto sm:ml-0 bg-blue-900 hover:bg-blue-500 border-0 text-white h-9">
-                  <Download className="mr-2 h-4 w-4" />
-                  <span className="hidden sm:inline">Download Report</span>
-                </Button>
-              </div>
-            </div>
+          <TabsContent value="earnings" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Earnings Overview</CardTitle>
+                <CardDescription>Your earnings over the selected time period</CardDescription>
+              </CardHeader>
+              <CardContent className="pl-2">
+                <CreatorEarningsChart />
+              </CardContent>
+            </Card>
+          </TabsContent>
 
-            <TabsContent value="overview" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <EarningsOverview />
-                <EngagementOverview />
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                <RevenueSourcesChart />
-                <ContentPerformanceChart />
-              </div>
-              <TopPerformingContent />
-            </TabsContent>
+          <TabsContent value="engagement" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Engagement Overview</CardTitle>
+                <CardDescription>Your likes, comments, and shares over time</CardDescription>
+              </CardHeader>
+              <CardContent className="pl-2">
+                <CreatorEngagementChart />
+              </CardContent>
+            </Card>
+          </TabsContent>
 
-            <TabsContent value="earnings" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <EarningsOverview />
-                <RevenueSourcesChart />
-              </div>
-              <EarningsHistory />
-            </TabsContent>
+          <TabsContent value="clips" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Top Performing Clips</CardTitle>
+                <CardDescription>Your most viewed and highest earning clips</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CreatorClipsTable />
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+
+            
 
             <TabsContent value="content" className="space-y-4">
               <ContentPerformanceChart />
@@ -108,10 +110,9 @@ export default function DashboardPage() {
         <div className="col-span-1">
           <div className="space-y-4">
             <WithdrawalPanel />
-            <TargetSettingPanel />
           </div>
         </div>
       </div>
     </DashboardShell>
-  );
+  );
 }

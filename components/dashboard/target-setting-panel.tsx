@@ -102,11 +102,11 @@ export function TargetSettingPanel() {
                 <span className="text-sm text-muted-foreground ml-1">/ ${targetGoal}</span>
               </div>
             </div>
-            <Progress value={projectedPercentage} className="h-2" indicatorClassName="bg-blue-500" />
+            <Progress value={projectedPercentage} className="h-2" />
             <div className="flex justify-between text-xs">
               <span className="text-blue-500">{projectedPercentage.toFixed(0)}% projected</span>
               <span className="text-muted-foreground">
-                {projectedEarnings >= targetGoal ? "On track" : `$${(targetGoal - projectedEarnings).toFixed(2)} short`}
+                {projectedEarnings >= targetGoal ? "On track" : `${(targetGoal - projectedEarnings).toFixed(2)} short`}
               </span>
             </div>
           </div>
@@ -140,7 +140,7 @@ export function TargetSettingPanel() {
                   </span>
                 </div>
                 {!milestone.achieved && (
-                  <Progress value={milestone.progress} className="h-1" indicatorClassName="bg-purple-500" />
+                  <Progress value={milestone.progress} className="h-1" />
                 )}
               </div>
             ))}
@@ -216,7 +216,6 @@ export function TargetSettingPanel() {
           </DialogContent>
         </Dialog>
       </CardFooter>
-    </Card>
-  )
+    </Card>
+  )
 }
-

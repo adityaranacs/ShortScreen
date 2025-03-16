@@ -33,7 +33,9 @@ export function MoviePoster({ movie }: MoviePosterProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={`/movie/${movie.id}`}>
+      <Link href="/shorts">
+        {/* Content inside Link */}
+      </Link>
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
           <Image
             src={movie.poster || "/placeholder.svg"}
@@ -79,8 +81,6 @@ export function MoviePoster({ movie }: MoviePosterProps) {
             <p className="text-xs text-white/80 mt-2 line-clamp-2">{movie.description}</p>
           </div>
         </div>
-      </Link>
-    </div>
-  )
+    </div>
+  )
 }
-
